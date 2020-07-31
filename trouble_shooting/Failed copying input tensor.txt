@@ -1,0 +1,60 @@
+# error log1
+
+Traceback (most recent call last):
+  File "train_sound.py", line 186, in <module>
+    main()
+  File "train_sound.py", line 182, in main
+    training(pad_sound, label, model_)
+  File "train_sound.py", line 55, in training
+    history = model.fit(tr_pad_sound, tr_label, batch_size=16,
+  File "/home/mldev/.conda/envs/emotion/lib/python3.8/site-packages/tensorflow/python/keras/engine/training.py", line 66, in _method_wrapper
+    return method(self, *args, **kwargs)
+  File "/home/mldev/.conda/envs/emotion/lib/python3.8/site-packages/tensorflow/python/keras/engine/training.py", line 795, in fit
+    data_adapter.train_validation_split((x, y, sample_weight),
+  File "/home/mldev/.conda/envs/emotion/lib/python3.8/site-packages/tensorflow/python/keras/engine/data_adapter.py", line 1337, in train_validation_split
+    train_arrays = nest.map_structure(
+  File "/home/mldev/.conda/envs/emotion/lib/python3.8/site-packages/tensorflow/python/util/nest.py", line 617, in map_structure
+    structure[0], [func(*x) for x in entries],
+  File "/home/mldev/.conda/envs/emotion/lib/python3.8/site-packages/tensorflow/python/util/nest.py", line 617, in <listcomp>
+    structure[0], [func(*x) for x in entries],
+  File "/home/mldev/.conda/envs/emotion/lib/python3.8/site-packages/tensorflow/python/keras/engine/data_adapter.py", line 1335, in _split
+    return array_ops.gather_v2(t, indices)
+  File "/home/mldev/.conda/envs/emotion/lib/python3.8/site-packages/tensorflow/python/util/dispatch.py", line 180, in wrapper
+    return target(*args, **kwargs)
+  File "/home/mldev/.conda/envs/emotion/lib/python3.8/site-packages/tensorflow/python/ops/array_ops.py", line 4535, in gather_v2
+    return gather(
+  File "/home/mldev/.conda/envs/emotion/lib/python3.8/site-packages/tensorflow/python/util/dispatch.py", line 180, in wrapper
+    return target(*args, **kwargs)
+  File "/home/mldev/.conda/envs/emotion/lib/python3.8/site-packages/tensorflow/python/ops/array_ops.py", line 4524, in gather
+    return gen_array_ops.gather_v2(params, indices, axis, name=name)
+  File "/home/mldev/.conda/envs/emotion/lib/python3.8/site-packages/tensorflow/python/ops/gen_array_ops.py", line 3755, in gather_v2
+    _ops.raise_from_not_ok_status(e, name)
+  File "/home/mldev/.conda/envs/emotion/lib/python3.8/site-packages/tensorflow/python/framework/ops.py", line 6653, in raise_from_not_ok_status
+    six.raise_from(core._status_to_exception(e.code, message), None)
+  File "<string>", line 3, in raise_from
+tensorflow.python.framework.errors_impl.InternalError: Failed copying input tensor from /job:localhost/replica:0/task:0/device:CPU:0 to /job:localhost/replica:0/task:0/device:GPU:0 in order to run GatherV2: Dst tensor is not initialized. [Op:GatherV2]
+
+
+# error log2
+
+Traceback (most recent call last):
+  File "train_sound.py", line 184, in <module>
+    main()
+  File "train_sound.py", line 171, in main
+    sound_model = LSTM(128, activation='sigmoid')(sound_model)
+  File "/home/mldev/.conda/envs/emotion/lib/python3.8/site-packages/tensorflow/python/keras/layers/recurrent_v2.py", line 1096, in __init__
+    if context.num_gpus() > 0:
+  File "/home/mldev/.conda/envs/emotion/lib/python3.8/site-packages/tensorflow/python/eager/context.py", line 2046, in num_gpus
+    return context().num_gpus()
+  File "/home/mldev/.conda/envs/emotion/lib/python3.8/site-packages/tensorflow/python/eager/context.py", line 1047, in num_gpus
+    self.ensure_initialized()
+  File "/home/mldev/.conda/envs/emotion/lib/python3.8/site-packages/tensorflow/python/eager/context.py", line 515, in ensure_initialized
+    context_handle = pywrap_tfe.TFE_NewContext(opts)
+tensorflow.python.framework.errors_impl.InternalError: CUDA runtime implicit initialization on GPU:0 failed. Status: out of memory
+
+
+
+# solution: https://github.com/masonai/nlp/blob/master/fit_generator.py
+
+
+
