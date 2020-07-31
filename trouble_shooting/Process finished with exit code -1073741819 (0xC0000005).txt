@@ -1,3 +1,0 @@
-- issue: Process finished with exit code -1073741819 (0xC0000005)
-- solution: Change the python version 
-- for me : python 3.5 --> python 3.6
